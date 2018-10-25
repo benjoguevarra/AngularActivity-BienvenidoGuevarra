@@ -1,0 +1,324 @@
+<!-- <p-dataTable #dt [value]="personList" [paginator]="true" [rows]="5" [pageLinks]="5" [responsive]="true" [totalRecords]="totalRecords"
+  (onLazyLoad)="paginate($event)" [lazy]="true">
+
+  <p-header>
+
+    <span class="addHeader" style=float:left>
+      <button pButton type="button" icon="fa fa-plus" (click)="addPerson()"></button>
+      &nbsp;Add Person
+    </span>
+
+    <span class="searchHeader" style=float:right>
+      <input pInputText type="text" [(ngModel)]="searchFirstName" ngChange="searchEmpty()" placeholder="Search.." />
+      <button pButton type="button" icon="fa fa-search" (click)="searchPerson()"></button>
+    </span>
+    <br/>
+    <br/>
+
+  </p-header>
+  <p-column>
+    <ng-template pTemplate type="body" let-Person="rowData">
+      <button pButton type="button" icon="fa fa-pencil" (click)="editPerson(Person)"></button>
+      <button pButton type="button" icon="fa fa-trash" (click)="deletePerson(Person)"></button>
+    </ng-template>
+  </p-column>
+  <p-column field="firstName" header="Firstname"></p-column>
+  <p-column field="middleName" header="Middlename"></p-column>
+  <p-column field="lastName" header="Lastname"></p-column>
+  <p-column field="age" header="Age"></p-column>
+  <p-column field="birthday" header="Birthday"></p-column>
+  <p-column field="photo" header="Photo"></p-column>
+  <p-column field="gender" header="Gender"></p-column>
+  <p-column field="relationshipStatus" header="Status"></p-column>
+  <p-column field="nationality" header="Nationality"></p-column>
+  <p-column field="phoneNumber" header="Phone"></p-column>
+  <p-column field="religion" header="Religion"></p-column>
+
+  <p-column header="Address">
+    <ng-template pTemplate type="body" let-Person="rowData">
+      {{Person.streetHouseBuilding + " " + Person.baranggaySubdivision + " " + Person.city + " " + Person.region}}
+    </ng-template>
+  </p-column>
+</p-dataTable>  -->
+
+
+
+ <!-- <table mat-table #dt [dataSource]="personList" class="mat-elevation-z8" [paginator]="true" [rows]="5" [pageLinks]="5"
+ [responsive]="true" [totalRecords]="totalRecords" (onLazyLoad)="paginate($event)" [lazy]="true"> 
+
+  <p-header>
+
+   
+
+    <span class="searchHeader" style=float:right>
+      <input pInputText type="text" [(ngModel)]="searchFirstName" ngChange="searchEmpty()" placeholder="Search.." />
+      <button pButton type="button" icon="fa fa-search" (click)="searchPerson()"></button>
+    </span>
+
+  </p-header> -->
+
+  
+  
+  <p-header>
+      <div style="float:left; margin: 25px">
+          <button mat-mini-fab (click)="addPerson(Person)"><mat-icon>add</mat-icon></button> 
+     <!-- <button pButton type="button" icon="fa fa-plus" (click)="addMonster()"></button> -->
+        &nbsp;
+      </div>
+  
+      <div style="float:right; margin: 25px">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+    </mat-form-field>
+  </div>
+  </p-header>
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let Person"> 
+        <button mat-mini-fab (click)="editPerson(Person)"><mat-icon>edit</mat-icon></button> 
+        <button mat-mini-fab (click)="deletePerson(Person)"><mat-icon>delete</mat-icon></button>
+     </td>
+    </ng-container> 
+
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef> Firstname </th>
+    <td mat-cell *matCellDef="let person"> {{person.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="middleName">
+    <th mat-header-cell *matHeaderCellDef> Middlename </th>
+    <td mat-cell *matCellDef="let person"> {{person.middleName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Lastname </th>
+    <td mat-cell *matCellDef="let person"> {{person.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> Age </th>
+    <td mat-cell *matCellDef="let person"> {{person.age}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="birthday">
+    <th mat-header-cell *matHeaderCellDef> Birthday </th>
+    <td mat-cell *matCellDef="let person"> {{person.birthday}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="photo">
+    <th mat-header-cell *matHeaderCellDef> Photo </th>
+    <td mat-cell *matCellDef="let person"> {{person.photo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> Gender </th>
+    <td mat-cell *matCellDef="let person"> {{person.gender}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="relationshipStatus">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let person"> {{person.relationshipStatus}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nationality">
+    <th mat-header-cell *matHeaderCellDef> Nationality </th>
+    <td mat-cell *matCellDef="let person"> {{person.nationality}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phoneNumber">
+    <th mat-header-cell *matHeaderCellDef> Phone </th>
+    <td mat-cell *matCellDef="let person"> {{person.phoneNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Address </th>
+    <td mat-cell *matCellDef="let person">  {{person.streetHouseBuilding + " " + person.baranggaySubdivision + " " + person.city + " " + person.region}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper *ngIf="selectPerson">
+  <mat-step>
+    <form [formGroup]="personFormGroup">
+
+
+      <mat-form-field>
+        <input type="text" formControlName="firstName" [(ngModel)]="selectPerson.firstName" placeholder="Enter Firstname" matInput
+          required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input type="text" formControlName="middleName" [(ngModel)]="selectPerson.middleName" placeholder="Enter Middlename" matInput>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input type="text" formControlName="lastName" [(ngModel)]="selectPerson.lastName" placeholder="Enter Lastname" matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput disabled [matDatepicker]="birthday" [max]="todayDate" formControlName="birthday" [(ngModel)]="selectPerson.birthday" placeholder="Birthday"
+          readonly>
+        <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+        <mat-datepicker #birthday (selectedChange)="computeAge()"  disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+
+
+      <br/>
+      <mat-form-field>
+        <mat-select placeholder="Choose Status" [(value)]="relationshipStatus" formControlName="relationshipStatus" [(ngModel)]="selectPerson.relationshipStatus"
+          required>
+          <mat-option>None</mat-option>
+          <mat-option value="Single">Single</mat-option>
+          <mat-option value="InaRelationship">In a Relationship</mat-option>
+          <mat-option value="Its Complicated">Its Complicated</mat-option>
+        </mat-select>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="nationality" [(ngModel)]="selectPerson.nationality" placeholder="Enter Nationality" matInput
+          required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" mask="(00) 000 000 0000" formControlName="phoneNumber" [(ngModel)]="selectPerson.phoneNumber" placeholder="Phone: +63 (912) XXX XXXX"
+          matInput required>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input type="text" formControlName="religion" [(ngModel)]="selectPerson.religion" placeholder="Enter Religion" matInput>
+      </mat-form-field>
+
+      <br/>
+      <br/>
+
+      <div align="center">
+        <label color="red">Select your Gender: </label>
+        <mat-radio-group label="Gender" formControlName="gender" [(ngModel)]="selectPerson.gender" required>
+          <mat-radio-button value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+          <mat-radio-button value="Others">Others</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+
+      <div class="centerButtons">
+        <button mat-raised-button matStepperNext>Next</button>
+        <button mat-raised-button (click)="savePerson()" *ngIf="isDeletePerson == false">Save</button>
+        <button mat-raised-button (click)="okDelete()" *ngIf="isDeletePerson == true">Delete</button>
+        <button mat-raised-button (click)="cancelPerson()">Cancel</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="personFormGroup">
+    <form [formGroup]="personDetailFormGroup">
+
+      <mat-form-field>
+        <input type="text" formControlName="streetHouseBuilding" [(ngModel)]="selectPerson.streetHouseBuilding" placeholder="Enter Street/House No./Building "
+          matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="baranggaySubdivision" [(ngModel)]="selectPerson.baranggaySubdivision" placeholder="Enter Brgy/Subd"
+          matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="city" [(ngModel)]="selectPerson.city" placeholder="Enter City" matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="region" [(ngModel)]="selectPerson.region" placeholder="Enter Region" matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="country" [(ngModel)]="selectPerson.country" placeholder="Enter Country" matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" min="0" oninput="validity.valid || (value='');" formControlName="postalCode" [(ngModel)]="selectPerson.postalCode"
+          placeholder="Enter Postal Code" matInput required>
+        <mat-error>Postal Code is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- 
+      <mat-form-field>
+          <input type="text" formControlName="postalCode" [(ngModel)]="selectPerson.postalCode" 
+          placeholder="Enter Postal Code" matInput>
+        </mat-form-field> -->
+
+      <mat-form-field>
+        <input type="number" formControlName="latitude" [(ngModel)]="selectPerson.latitude" placeholder="Enter latitude" matInput
+          required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" formControlName="longtitude" [(ngModel)]="selectPerson.longtitude" placeholder="Enter longtitude" matInput
+          required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="centerButtons">
+        <!-- <button mat-raised-button (click)="okDelete()">Delete</button>
+              <button mat-raised-button (click)="savePerson()">Save</button> -->
+        <button mat-raised-button (click)="cancelPerson()">Cancel</button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+
+      </div>
+
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>

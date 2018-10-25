@@ -1,0 +1,37 @@
+.mat-column-monsterName {
+    flex: 0 0 100px;
+    width: 20%;
+  }
+
+  .mat-column-price {
+    flex: 0 0 100px;
+    width: 15%;
+  }
+
+  .mat-column-isActive {
+    flex: 0 0 100px;
+    width: 15%;
+  }
+
+  .mat-column-dateCreated {
+    flex: 0 0 100px;
+    width: 15%;
+  }
+
+  .mat-column-button {
+    flex: 0 0 100px;
+    width: 15%;
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

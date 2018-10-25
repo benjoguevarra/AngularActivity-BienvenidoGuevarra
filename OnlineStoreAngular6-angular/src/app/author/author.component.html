@@ -1,0 +1,96 @@
+<p-dataTable #dt [value]="authorList" [paginator]="true" [rows]="5" [pageLinks]="5" [responsive]="true" [totalRecords]="totalRecords"
+  (onLazyLoad)="paginate($event)" > 
+  <p-header>
+    <span class="addHeader" style=float:left>
+      <button type="button" pButton icon="fa fa-plus" (click)="addAuthor()"></button>
+      &nbsp; Add a Author
+    </span>
+    <span class="searchHeader"style=float:none>
+      <input pInputText type="text" placeholder="Search by Firstname" [(ngModel)]="searchAuthorFirstname">
+      <button pButton type="button" icon="fa fa-search" (click)="searchAuthor()"></button>
+    </span>
+  </p-header>
+  <p-column>
+    <ng-template pTemplate type="body" let-Author="rowData">
+      <button type="button" pButton icon="fa fa-pencil" (click)="editAuthor(Author)"></button>
+      <button type="button" pButton icon="fa fa-trash" (click)="deleteAuthor(Author)"></button>
+    </ng-template>
+  </p-column>
+
+  <p-column field="authorID" header="Author ID"></p-column>
+  <p-column field="authorFirstname" header="Firstname"></p-column>
+  <p-column field="authorLastname" header="Lastname"></p-column>
+  <p-column field="authorGender" header="Gender"></p-column>
+  <p-column field="authorIsAlive" header="Is alive?"></p-column>
+  <p-column field="authorBirthday" header="Birthday"></p-column>
+
+
+</p-dataTable>
+
+<form [formGroup]="authorForm">
+  <p-dialog #dt header="Author" [(visible)]="selectAuthor" *ngIf="selectAuthor" width="750" height="auto">
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+
+      <!-- <label>Author ID</label>
+      <input pInputText id="input-cName" formControlName="authorID" placeholder="Enter Author ID" [(ngModel)]="selectAuthor.authorID"> -->
+      <label>Author Firstname</label>
+      <input pInputText id="input-cName" formControlName="authorFirstname" placeholder="Enter Author Firstname" [(ngModel)]="selectAuthor.authorFirstname">
+      <br />
+      <br />
+      <label>Author Lastname</label>
+      <input pInputText id="input-cName" formControlName="authorLastname" placeholder="Enter Author Lastname" [(ngModel)]="selectAuthor.authorLastname">
+      <br />
+      <br />
+  
+
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+
+        <label>Author Gender</label>
+        <input pInputText id="input-cName" formControlName="authorGender" placeholder="Enter Author Gender" [(ngModel)]="selectAuthor.authorGender">
+        <br />
+        <br />
+        <label>Birthday</label>
+        <p-calendar [(ngModel)]="authorBirthday" formControlName="authorBirthday" placeholder="Enter Birthday" readonlyInput="true"></p-calendar>
+        <br />
+        <br />
+        <label>Author Alive?</label>
+        <br/>
+        <p-radioButton [(ngModel)]="selectAuthor.authorIsAlive" formControlName="authorIsAlive" label="Yes" name="AuthorAlivex"
+          value=true></p-radioButton>
+          <br/> 
+        <p-radioButton [(ngModel)]="selectAuthor.authorIsAlive" formControlName="authorIsAlive" label="No" name="AuthorAlivex"
+          value=false></p-radioButton>
+          <br />
+        <br />
+        <br />
+        <br/>
+        <br/>
+
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <button pButton type="button" icon="fa fa-trash" label="Delete" (click)="okDelete()" *ngIf="isDeleteAuthor == true"></button>
+
+      <button pButton type="button" icon="fa fa-file" label="Save" (click)="saveAuthor()" *ngIf="isDeleteAuthor == false"></button>
+
+
+
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <button pButton type="button" icon="fa fa-ban" label="Cancel" (click)="cancelAuthor()"></button>
+    </div>
+
+
+
+
+
+  </p-dialog>
+
+
+
+
+
+
+</form>

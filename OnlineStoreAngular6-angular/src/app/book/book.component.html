@@ -1,0 +1,97 @@
+<p-dataTable #dt [value]="bookList" [paginator]="true" [rows]="5" [pageLinks]="5" [responsive]="true" [totalRecords]="totalRecords"
+  (onLazyLoad)="paginate($event)" [lazy]="true">
+  <p-header>
+    <span class="addHeader" style=float:left>
+      <button type="button" pButton icon="fa fa-plus" (click)="addBook()"></button>
+      &nbsp; Add a Book
+    </span>
+    <span class="searchHeader"style=float:none>
+      <input pInputText type="text" placeholder="Search by Book Title" [(ngModel)]="searchBookTitle">
+      <button pButton type="button" icon="fa fa-search" (click)="searchBook()"></button>
+    </span>
+  </p-header>
+  <p-column>
+    <ng-template pTemplate type="body" let-Book="rowData">
+      <button type="button" pButton icon="fa fa-pencil" (click)="editBook(Book)"></button>
+      <button type="button" pButton icon="fa fa-trash" (click)="deleteBook(Book)"></button>
+    </ng-template>
+  </p-column>
+
+  <p-column field="bookID" header="Book ID"></p-column>
+  <p-column field="authorID" header="Author ID"></p-column>
+  <p-column field="bookTitle" header="Title"></p-column>
+  <p-column field="bookSypnosis" header="Sypnosis"></p-column>
+  <p-column field="bookGenre" header="Genre"></p-column>
+  <p-column field="bookPublished" header="Date Published"></p-column>
+  <p-column field="bookIsAvailable" header="Is Available"></p-column>
+
+</p-dataTable>
+
+<form [formGroup]="bookForm">
+  <p-dialog #dt header="Book" [(visible)]="selectBook" *ngIf="selectBook" width="750" height="auto">
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+
+      <label>Author ID</label>
+      <input pInputText id="input-cName" formControlName="authorID" placeholder="Enter Author ID" [(ngModel)]="selectBook.authorID">
+      <br />
+      <br />
+      <label>Book Title</label>
+      <input pInputText id="input-cName" formControlName="bookTitle" placeholder="Enter Book Title" [(ngModel)]="selectBook.bookTitle">
+      <br />
+      <br />
+      <label>Book Sypnosis</label>
+      <input pInputText id="input-cName" formControlName="bookSypnosis" placeholder="Enter Book Sypnosis" [(ngModel)]="selectBook.bookSypnosis">
+      <br />
+      <br />
+
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+
+        <label>Book Genre</label>
+        <input pInputText id="input-cName" formControlName="bookGenre" placeholder="Enter Book Genre" [(ngModel)]="selectBook.bookGenre">
+        <br />
+        <br />
+        <label>Published Date</label>
+        <p-calendar [(ngModel)]="bookPublished" formControlName="bookPublished" placeholder="Enter Published Date" readonlyInput="true"></p-calendar>
+        <br />
+        <br />
+        <label>Book Available?</label>
+        <br/>
+        <p-radioButton [(ngModel)]="selectBook.bookIsAvailable" formControlName="bookIsAvailable" label="Yes" name="BookAvailables"
+          value=true></p-radioButton>
+          <br/>
+        <p-radioButton [(ngModel)]="selectBook.bookIsAvailable" formControlName="bookIsAvailable" label="No" name="BookAvailables"
+          value=false></p-radioButton>
+          <br />
+        <br />
+        <br />
+        <br/>
+        <br/>
+
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <button pButton type="button" icon="fa fa-trash" label="Delete" (click)="okDelete()" *ngIf="isDeleteBook == true"></button>
+
+      <button pButton type="button" icon="fa fa-file" label="Save" (click)="saveBook()" *ngIf="isDeleteBook == false"></button>
+
+
+
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <button pButton type="button" icon="fa fa-ban" label="Cancel" (click)="cancelBook()"></button>
+    </div>
+
+
+
+
+
+  </p-dialog>
+
+
+
+
+
+
+</form>

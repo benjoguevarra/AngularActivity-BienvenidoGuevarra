@@ -1,0 +1,78 @@
+
+  
+  .mat-column-firstName {
+    flex: 0 0 100px;
+    width: 12%;
+  }
+
+  .mat-column-middleName {
+    flex: 0 0 100px;
+    width: 11%;
+  }
+
+  .mat-column-lastName {
+    flex: 0 0 100px;
+    width: 11%;
+  }
+
+  .mat-column-age {
+    flex: 0 0 100px;
+    width: 5%;
+  }
+
+  .mat-column-birthday {
+    flex: 0 0 100px;
+    width: 8%;
+  }
+
+  .mat-column-photo {
+    flex: 0 0 100px;
+    width: 6%;
+  }
+
+  .mat-column-gender {
+    flex: 0 0 100px;
+    width: 8%;
+  }
+
+  .mat-column-status {
+    flex: 0 0 100px;
+    width: 8%;
+  }
+
+  .mat-column-nationality {
+    flex: 0 0 100px;
+    width: 9%;
+  }
+
+  .mat-column-phoneNumber {
+    flex: 0 0 12px;
+    width: 10%;
+  }
+
+  /* .mat-column-religion {
+    flex: 0 0 12px;
+    width: 10%;
+  } */
+
+  .mat-column-address {
+    flex: 0 0 100px;
+    width: 19%;
+  }
+
+  .mat-column-button {
+    flex: 0 0 100px;
+    width: 8%;
+  }
+  table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

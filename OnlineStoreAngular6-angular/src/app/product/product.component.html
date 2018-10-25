@@ -1,0 +1,80 @@
+<p-dataTable [value]="productList">
+  <p-header>
+    <div>
+      <button pButton type="button" icon="fa fa-plus" (click)="addProduct()"></button>
+      &nbsp;Add Product
+    </div>
+  </p-header>
+  <p-column>
+    <ng-template pTemplate type="body" let-Product="rowData">
+      <button pButton type="button" icon="fa fa-pencil" (click)="editProduct(Product)"></button>
+      <button pButton type="button" icon="fa fa-trash" (click)="deleteProduct(Product)"></button>
+    </ng-template>
+  </p-column>
+  <!-- <p-column field="productID" header="Product ID"></p-column> -->
+  <p-column field="productName" header="Product Name"></p-column>
+  <p-column field="supplierName" header="Supplier"></p-column>
+  <p-column field="categoryName" header="Category"></p-column>
+  <p-column field="unitPrice" header="Unit in Price"></p-column>
+  <p-column field="unitsInStock" header="Unit in Stock"></p-column>
+  <p-column field="unitsOnOrder" header="Unit on Order"></p-column>
+  <p-column field="reorderLevel" header="Reorder Level"></p-column>
+  <p-column field="discontinued" header="Discontinued"></p-column>
+
+ 
+
+</p-dataTable>
+
+<form [formGroup]="productForm">
+
+  <p-dialog #dt header="Product" [(visible)]="selectProduct" *ngIf="selectProduct" width="750" height="auto">
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label>Product Name</label>
+      <input pInputText id="input-cName" formControlName="productName" [(ngModel)]="selectProduct.productName">
+      <br/>
+      <br/>
+      <!-- <label>Supplier ID</label> -->
+      <p-dropdown [options]="supplierList" [(ngModel)]="selectSupplier"formControlName="supplier" 
+      optionLabel="companyName" placeholder= "Select Supplier"  [style]="{'width': '100%'}">
+      </p-dropdown>
+      <br/>
+      <br/>
+      <!-- <input pInputText id="input-cName" formControlName="supplierID" [(ngModel)]="selectProduct.supplierID"> -->
+      <!-- <label>Category ID</label> -->
+      <p-dropdown [options]="categoryList" [(ngModel)]="selectCategory"formControlName="category" 
+      optionLabel="categoryName" placeholder= "Select Category" [style]="{'width': '100%'}">
+      </p-dropdown>
+      <br/>
+      <br/>
+      <label>Unit Price</label>
+      <input pInputText id="input-cName" formControlName="unitPrice" [(ngModel)]="selectProduct.unitPrice">
+      <br/>
+      <label>Unit in Stock</label>
+      <input pInputText id="input-cName" formControlName="unitsInStock" [(ngModel)]="selectProduct.unitsInStock">
+      <br/>
+    </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label>Units on Order</label>
+      <input pInputText id="input-cName" formControlName="unitsOnOrder" [(ngModel)]="selectProduct.unitsOnOrder">
+      <br/>
+      <label>Reorder Level</label>
+      <input pInputText id="input-cName" formControlName="reorderLevel" [(ngModel)]="selectProduct.reorderLevel">
+      <br/>
+      <label>Discontinued</label>
+      <input pInputText id="input-cName" formControlName="discontinued" [(ngModel)]="selectProduct.discontinued">
+      <br/>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <button pButton type="button" icon="fa fa-trash" label="Delete" (click)="okDelete()" *ngIf="isDeleteProduct == true"></button>
+        <button pButton type="button" icon="fa fa-file" label="Save" (click)="saveProduct()" *ngIf="isDeleteProduct == false"></button>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <button pButton type="button" icon="fa fa-ban" label="Cancel" (click)="cancelProduct()"></button>
+      </div>
+
+  </p-dialog>
+</form>

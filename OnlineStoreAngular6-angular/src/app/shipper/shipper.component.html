@@ -1,0 +1,33 @@
+<p-dataTable [value]="shipperList">
+  <p-header>
+    <div>
+      <button pButton type="button" icon="fa fa-plus" (click)="addShipper()"></button>
+      &nbsp;Add Shipper
+    </div>
+  </p-header>
+  <p-column>
+    <ng-template pTemplate type="body" let-Shipper="rowData">
+      <button pButton type="button" icon="fa fa-pencil" (click)="editShipper(Shipper)"></button>
+      <button pButton type="button" icon="fa fa-trash" (click)="deleteShipper(Shipper)"></button>
+    </ng-template>
+  </p-column>
+  <p-column field="shipperID" header="Shipper ID"></p-column>
+  <p-column field="companyName" header="Company Name"></p-column>
+  <p-column field="phone" header="Phone"></p-column>
+</p-dataTable>
+
+<form [formGroup]="shipperForm">
+  <p-dialog header="Shipper" [(visible)]="selectShipper" *ngIf="selectShipper">
+    <div class="ui-g-12 ui-md-12 ui-fluid">
+      <label>Company Name</label>
+      <input pInputText id="input-cName" formControlName="companyName" placeholder="Enter Company Name" [(ngModel)]="selectShipper.companyName">
+      <br/>
+      <label>Phone</label>
+      <input pInputText id="input-cName" formControlName="phone" placeholder="Enter Phone Number" [(ngModel)]="selectShipper.phone">
+      <br/>
+      <button pButton type="button" icon="fa fa-trash" label="delete" (click)="okDelete()" *ngIf="isDeleteShipper == true"></button>
+      <button pButton type="button" icon="fa fa-file" label="save" (click)="saveShipper()" *ngIf="isDeleteShipper == false"></button>
+      <button pButton type="button" icon="fa fa-file" label="cancel" (click)="cancelShipper()"></button>
+    </div>
+  </p-dialog>
+</form>

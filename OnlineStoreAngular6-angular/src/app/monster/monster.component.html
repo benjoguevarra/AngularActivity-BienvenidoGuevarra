@@ -1,0 +1,98 @@
+<p-header>
+    <div style="float:left; margin: 25px">
+        <button mat-mini-fab (click)="addMonster(Monster)"><mat-icon>add</mat-icon></button> 
+   <!-- <button pButton type="button" icon="fa fa-plus" (click)="addMonster()"></button> -->
+      &nbsp; <span style="color:rgb(255, 64, 129);">Add new monster</span>
+    </div>
+
+    <div style="float:right; margin: 25px">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+  </mat-form-field>
+</div>
+</p-header>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let Monster"> 
+        <button mat-mini-fab (click)="editMonster(Monster)"><mat-icon>edit</mat-icon></button> 
+        <button mat-mini-fab (click)="deleteMonster(Monster)"><mat-icon>delete</mat-icon></button>
+     </td>
+    </ng-container> 
+
+  <ng-container matColumnDef="monsterName">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let monster"> {{monster.monsterName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let monster"> {{monster.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isActive">
+    <th mat-header-cell *matHeaderCellDef> Is active? </th>
+    <td mat-cell *matCellDef="let monster"> {{monster.isActive}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateCreated">
+    <th mat-header-cell *matHeaderCellDef> Date Created </th>
+    <td mat-cell *matCellDef="let monster"> {{monster.dateCreated}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper *ngIf="selectMonster">
+  <mat-step>
+    <form [formGroup]="monsterFormGroup">
+
+      <mat-form-field>
+        <input type="text" formControlName="monsterName" [(ngModel)]="selectMonster.monsterName" placeholder="Enter Monster Name" matInput
+          required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" step=".01" min="0" oninput="validity.valid || (value='') ;"formControlName="price" [(ngModel)]="selectMonster.price"
+          placeholder="Enter Price" matInput required>
+        <mat-error>This is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput disabled [matDatepicker]="dateCreated" [max]="todayDate" formControlName="dateCreated" [(ngModel)]="selectMonster.dateCreated" placeholder="Date Created"
+          readonly>
+        <mat-datepicker-toggle matSuffix [for]="dateCreated"></mat-datepicker-toggle>
+        <mat-datepicker #dateCreated disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+      <div align="center">
+        <label>Is Active</label>
+         <mat-radio-group class="isActive" [(ngModel)]="selectMonster.isActive" formControlName="isActive">
+           <mat-radio-button class="isActive" [value]="true">True</mat-radio-button>
+           <mat-radio-button class="isActive" [value]="false">False</mat-radio-button>
+         </mat-radio-group>
+       </div>
+
+      <br/>
+
+      <div class="centerButtons">
+        <button mat-raised-button (click)="saveMonster()" *ngIf="isDeleteMonster == false">Save</button>
+        <button mat-raised-button (click)="okDelete()" *ngIf="isDeleteMonster == true">Delete</button>
+        <button mat-raised-button (click)="cancelMonster()">Cancel</button>
+      </div>
+
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
